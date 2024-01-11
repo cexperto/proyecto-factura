@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Confirmar Eliminación de Factura</h2>
+  <p>¿Estás seguro de que deseas eliminar la factura de {{ factura.nombre_cliente }}?</p>
+  <form method="post" action="{% url 'eliminar_factura' pk=factura.pk %}">
+    {% csrf_token %}
+    <button type="submit">Eliminar</button>
+  </form>
+  <a href="{% url 'listar_facturas' %}">Cancelar</a>
+{% endblock %}

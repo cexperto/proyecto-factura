@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{% if form.instance.pk %}Editar{% else %}Nueva{% endif %} Factura</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+  </form>
+  <a href="{% url 'listar_facturas' %}">Cancelar</a>
+{% endblock %}

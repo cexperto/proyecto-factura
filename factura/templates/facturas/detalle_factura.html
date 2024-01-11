@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Detalles de la Factura</h2>
+  <p>Cliente: {{ factura.nombre_cliente }}</p>
+  <p>Fecha de Emisión: {{ factura.fecha_emision }}</p>
+  <p>Producto: {{ factura.nombre_producto }}</p>
+  <p>Cantidad: {{ factura.cantidad }}</p>
+  <p>Precio Unitario: {{ factura.precio_unitario }}</p>
+  <p>Total: {{ factura.calcular_total }}</p>
+  <a href="{% url 'editar_factura' pk=factura.pk %}">editar</a>
+  <a href="{% url 'listar_facturas' %}">Volver al listado</a>
+{% endblock %}
