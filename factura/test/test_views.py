@@ -1,8 +1,11 @@
 import pytest
 from django.test import Client
 from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APIClient
 
 from factura.models import Factura
+from factura.serializer import FacturaSerializer
 
 pytestmark = pytest.mark.django_db
 
@@ -72,3 +75,26 @@ def test_eliminar_factura(prueba_factura):
     assert response.status_code == 302
     assert response.url == reverse("listar_facturas")
     assert not prueba_factura._meta.model.objects.filter(pk=prueba_factura.pk).exists()
+
+
+def test_factura_list_create():
+    client = APIClient()
+    url = reverse("api_listar_facturas")
+    data = {
+        "nombre_cliente": "Cliente de prueba",
+        "fecha_emision": "2022-01-01",
+        "nombre_producto": "Producto de prueba",
+        "cantidad": 1,
+        "precio_unitario": 10.0,
+    }
+    response = client.post(url, data=data, format="json")
+    assert response.status_code == status.HTTP_201_CREATED
+    assert Factura.objects.filter(nombre_producto=data["nombre_producto"]).exists()
+    response = client.get(url)
+    assert response.status_code == status.HTTP_200_OK
+    assert (
+        FacturaSerializer(
+            Factura.objects.get(nombre_producto=data["nombre_producto"])
+        ).data
+        in response.data
+    )
