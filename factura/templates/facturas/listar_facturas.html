@@ -7,5 +7,7 @@
         <a href="{% url 'eliminar_factura' pk=factura.pk %}">Eliminar factura</a> </li>
     {% endfor %}
   </ul>
-  <a href="{% url 'nueva_factura' %}">Nueva Factura</a>
+  <center>
+    <a href="{% url 'nueva_factura' %}">Nueva Factura</a>
+  </center>
 {% endblock %}
