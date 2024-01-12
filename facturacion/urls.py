@@ -6,6 +6,7 @@ from factura.views import (
     DetalleFacturaView,
     EditarFacturaView,
     EliminarFacturaView,
+    FacturaListCreateAPIView,
     ListarFacturasView,
     inicio,
 )
@@ -23,5 +24,10 @@ urlpatterns = [
         "facturas/eliminar/<int:pk>/",
         EliminarFacturaView.as_view(),
         name="eliminar_factura",
+    ),
+    path(
+        "api-listar-facturas/",
+        FacturaListCreateAPIView.as_view(),
+        name="api_listar_facturas",
     ),
 ]
