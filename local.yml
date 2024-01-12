@@ -1,0 +1,28 @@
+version: "3"
+
+volumes:
+  factura_local_postgres_data: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: factura_local_django
+    container_name: factura_local_django
+    platform: linux/x86_64
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z    
+    ports:
+      - "8000:8000"
+
+  postgres:    
+    image: 'postgres:15'
+    restart: 'always'
+    container_name: factura_local_postgres
+    volumes:
+      - factura_local_postgres_data:/var/lib/postgresql/data:Z
+    env_file:
+      - ./.env
