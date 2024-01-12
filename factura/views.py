@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -16,7 +16,7 @@ from factura.serializer import FacturaSerializer
 
 def inicio(request):
     """Vista que indica la pagina de inicio"""
-    return HttpResponse("inicio")
+    return redirect("listar_facturas")
 
 
 class ListarFacturasView(ListView):
