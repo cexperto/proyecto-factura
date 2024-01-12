@@ -25,3 +25,20 @@ http://0.0.0.0:8000/
   docker compose -f local.yml run --rm django pytest  
   
 ```
+
+
+## api
+
+GET
+
+http://0.0.0.0:8000/api-listar-facturas/
+
+
+POST
+
+{"nombre_cliente":"prueba api",
+"fecha_emision":"2023-11-01",
+"nombre_producto":"car",
+"cantidad":12,
+"precio_unitario":"255.00"
+}
